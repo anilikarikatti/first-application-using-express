@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <style>
+        .container{
+            position: absolute;
+            left: 400px;
+            top: 100px;
+            background-color: aqua;
+            height: 320px;
+            width: 500px;
+
+        }
+        div{
+            margin-top: 40px;
+            margin-left: 60px;
+
+        }
+
+        #name,#password{
+            height: 25px;
+            width: 200px;
+            margin-left: 20px;
+            border-radius: 20px;
+            margin-top: 10px;
+            margin-left: 75px;
+            font-size: 15px;
+            text-transform: capitalize;
+        }
+        label{
+            text-transform: uppercase;
+            margin-top: 10px;
+            margin-left: 80px;
+        }
+        button{
+            margin-left: 80px;
+            height: 30px;
+            width: 60px;
+            text-transform: capitalize;
+            border-radius: 20%;
+            background-color: green;
+            font-size: 15px;
+        }
+        h2{
+            text-align:  center;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+
+        <form action="/loginuser" method="post">
+            <div class="container">
+                <h2>login user</h2>
+                <div>
+                    <label for="name">enter your username</label>
+                    <input type="text" name = "name" placeholder="enter your name" id="name">
+                </div>
+                <div>
+                    <label for="password">enter your password</label>
+                    <input type="password" name = "password" placeholder="enter your password" id="password">
+                </div>
+                <div>
+                    <button type="submit">submit</button>
+                    <button type="reset">reset</button>
+                </div>
+            </div>
+        </form>
+
+    {% endblock %}
+</body>
+</html>
