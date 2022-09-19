@@ -1,6 +1,5 @@
 const express = require("express");
 
-const app = express();
 
 const port = process.env.PORT ||3000;
 
@@ -10,9 +9,11 @@ const router = require('./router');
 // const bodyParser = require("body-parser");
 
 const session = require("express-session");
-
+// const MongoStore = require('connect-mongo');
 // const mysql = require("mysql")(session)
 // const RedisStore = require('connect-redis')(session)
+
+const app = express();
 
 
 app.use(session({
@@ -20,7 +21,8 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
-   
+    // store: MongoStore.create({mongoUrl: 'mongodb://localhost/test-app'})
+
 
   }));
 
@@ -46,17 +48,26 @@ app.get("/register",(req,res)=>{
 
 app.get("/",(req,res)=>{
     // req.session.foo = "some text";
+
     res.render('login.html');
 })
 
 
 app.get("/home",(req,res)=>{
-    res.render("home.html",{name:req.session.user});
-    console.log(req.sessionID);
+    if(req.session.user){
+        res.render("home.html",{name:req.session.user});
+        console.log(req.sessionID);
+    }
+    else{
+        res.render("/login")
+    }
 })
 app.post("/registerUser",router);
 
 app.post("/loginuser",router);
+
+app.get("/logout",router);
+
 
 app.listen(port,()=>{
     console.log(`listening port ${port}`);

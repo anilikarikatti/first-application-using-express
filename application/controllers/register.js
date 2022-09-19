@@ -1,5 +1,6 @@
 
 // const e = require("express");
+const session = require("express-session");
 const connection = require("../dbconfig/connect")
 
 
@@ -64,4 +65,10 @@ async function loginUser(req,res){
   
 }
 
-module.exports ={registerUser,loginUser}
+async  function logout(req,res){
+
+    console.log("logout clicked");
+    session.destroy();
+}
+
+module.exports ={registerUser,loginUser,logout}
