@@ -15,6 +15,8 @@ const session = require("express-session");
 
 const app = express();
 
+app.use(express.static("public"));
+
 
 app.use(session({
     
@@ -54,13 +56,18 @@ app.get("/",(req,res)=>{
 
 
 app.get("/home",(req,res)=>{
-    if(req.session.user){
-        res.render("home.html",{name:req.session.user});
+    // if(req.session.user){
+        // res.render("home.html",{name:req.session.user});
+        res.render("home.html")
         console.log(req.sessionID);
-    }
-    else{
-        res.render("/login")
-    }
+    // }
+    // else{
+    //     res.render("login.html")
+    // }
+})
+
+app.get("/contact",(req,res)=>{
+    res.render("contact.html")
 })
 app.post("/registerUser",router);
 

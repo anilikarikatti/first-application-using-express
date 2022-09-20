@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .container{
+            height: 100vh;
+            overflow-y: scroll;
+        }
+
+       
+        a{
+            color: yellow;
+            text-decoration: none;
+            font-size: 20px;
+            text-transform: capitalize;
+
+        }
+        li{
+            list-style: none;
+            margin-left: 50px;
+        }
+
+        h1{
+            color: green;
+        }
+        img{
+            height: 100%;
+            width: 100px;
+        }
+        ul{
+            display: flex;
+            position: fixed;
+            top: 30px;
+            right: 30px;
+
+        }
+        .header{
+            height: 100px;
+            background-color: red;
+            position:fixed;
+            top: 0; 
+            display: flex;
+            width: 100vw;
+        }
+</style>
+</head>
+<body>
+    
+
+
+{% block content %}
+    <div class="container">
+        <header>
+            <div class="header">
+                <img src="jgi-logo.png" alt="" srcset="">
+            
+                <div class="links">
+                    <ul>
+                        <li><a href="">home</a></li>
+                        <li><a href="/contact">contact</a></li>
+                        <li><a href="">events</a></li>
+                        <li><a href="">prices</a></li>
+                        <li><a href="/logout">logout</a></li>
+
+                 </ul>
+                </div>
+            </div>
+
+        </header>
+
+        <div class="area">
+        </div>
+        <!-- <h1>welcome {{name}}</h1> -->
+    </div>
+        <!-- <button class="logout"> logout</button> -->
+    {% endblock %}
+
+</body>
+</html>

@@ -68,7 +68,8 @@ async function loginUser(req,res){
 async  function logout(req,res){
 
     console.log("logout clicked");
-    session.destroy();
+    req.session.destroy();
+    res.redirect("/")
 }
 
 module.exports ={registerUser,loginUser,logout}
