@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,93 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        /* img{
+            height: 100px;
+            width: 200px;
+        } */
+
+        .container{
+            height: 100vh;
+            overflow: hidden;
+        }
+        .body{
+            height:450px;
+            background-image: url('contact.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+
+        .address{
+            width: 180px;
+            margin-left: 120px;
+        }
+        .footer{
+            display: flex;
+        }
+
+        h5{
+            margin-top: 20px;
+        }
+        h2{
+            text-transform: capitalize;
+        }
+    </style>
 </head>
 <body>
-    {% extends "./header.html" %}
-    <h1>contact</h1>
-</body>
+    {% block header%}
+        {% include "./header.html" %}    
+
+
+    {% endblock%}
+    
+{% block body %}
+    <div class="container">
+        <div class="body">
+
+        </div>
+        <div class="footer">
+            <div  class="address">
+                <h2>address</h2>
+                <h5>
+                    404/4/5,Hebballi Road,Sai Nagar,
+                    Unkal, Hubballi-580032
+                </h5>
+            </div>
+            <div  class="address">
+                <h2>contact number</h2>
+                <h5>
+                    Admission Enquiry+916360003186
+
+                    Placement Cell+919844362025
+                </h5>
+            </div>
+            <div  class="address">
+                <h2>
+                    Email Address
+                </h2>
+                <h5>
+                        placement@jcethbl.edu.in
+
+                        careers@jcethbl.edu.in
+                        contactus@jcethbl.edu.in
+                </h5>
+            </div>
+            <div  class="address">
+                <h2>
+                    Website
+                </h2>
+                <h5>
+                    jcethbl.edu.in  
+                </h5>
+            </div>
+ 
+        </div>
+    </div>
+
+{% endblock  %}
+
+        
+</body> 
 </html>

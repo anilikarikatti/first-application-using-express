@@ -9,6 +9,7 @@ const router = require('./router');
 // const bodyParser = require("body-parser");
 
 const session = require("express-session");
+const { json } = require("body-parser");
 // const MongoStore = require('connect-mongo');
 // const mysql = require("mysql")(session)
 // const RedisStore = require('connect-redis')(session)
@@ -75,10 +76,20 @@ app.post("/loginuser",router);
 
 app.get("/logout",router);
 
+app.get("/event_types",router);
+
+
+app.get('/events_display',router)
+
+app.get('/sports',(req,res)=>{
+    res.render('sports.html')
+})
 
 app.listen(port,()=>{
     console.log(`listening port ${port}`);
 })
+
+
 
 
 // app.use(passport.initialize())

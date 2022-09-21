@@ -11,23 +11,26 @@
             padding: 0;
         }
 
-        .container{
+        /* .container{
             height: 100vh;
             overflow-y: scroll;
-        }
+        } */
 
-       
-        a{
+       header{
+        height: 100px;
+       }
+        a,p{
             color: yellow;
             text-decoration: none;
             font-size: 20px;
             text-transform: capitalize;
 
         }
-        li{
+        .header > .links > ul  > li,p{
             list-style: none;
             margin-left: 50px;
         }
+
 
         h1{
             color: green;
@@ -51,24 +54,47 @@
             display: flex;
             width: 100vw;
         }
+
+        .options > li{
+            list-style: none;
+            color: black;
+            margin-top: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+        .options{
+            background-color: gray;
+            overflow-y: scroll;
+            overflow-wrap:break-word;
+
+        }
+
+        .events:hover{
+            cursor: pointer;
+        }
+        .options > li:hover{
+            cursor: pointer;
+        }
 </style>
 </head>
 <body>
     
 
 
-{% block content %}
-    <div class="container">
+{% block header %}
+    <!-- <div class="container"> -->
+        <form action="/events_display" method="get" id="for">
         <header>
             <div class="header">
                 <img src="jgi-logo.png" alt="" srcset="">
             
                 <div class="links">
                     <ul>
-                        <li><a href="">home</a></li>
+                        <li><a href="/home">home</a></li>
                         <li><a href="/contact">contact</a></li>
-                        <li><a href="">events</a></li>
-                        <li><a href="">prices</a></li>
+                        <!-- <li><a href="" class="events">events</a></li> -->
+                        <p class="events">events</p>
+                        <li><a href="">prizes</a></li>
                         <li><a href="/logout">logout</a></li>
 
                  </ul>
@@ -76,13 +102,99 @@
             </div>
 
         </header>
+    </form>
+{% endblock %} 
 
-        <div class="area">
-        </div>
-        <!-- <h1>welcome {{name}}</h1> -->
-    </div>
-        <!-- <button class="logout"> logout</button> -->
-    {% endblock %}
+<script>
+    let btn = document.querySelector('.events');
 
+    let header = document.querySelector('.header');
+
+    let visible = false;
+    let created = false;
+
+    btn.onclick =async function(){
+
+        
+
+        let data  =await fetch('/event_types');
+        let ans = await data.json();
+        
+        // console.log(ans);
+        
+        if(visible != true){
+            if(created != true){
+               console.log("created");
+                let div = document.createElement('div');
+
+                div.style.height = '10px';
+                // div.style.border = '1px solid black';
+                div.style.innerHTML = 'hello world';
+                div.style.marginLeft = '950px';
+                div.style.height = '100px'
+                div.style.width = '120px'
+                div.style.marginTop = '50px'
+                div.classList.add('options')
+                
+
+                for(let i of ans){
+                    let li = document.createElement('li');
+                    if(i.includes('_')){
+                        i = i.split('_').join(' ');
+                    }
+                    li.innerText = i;
+                    li.classList.add('event_lists')
+                    // console.log(i);
+                    div.appendChild(li);
+                }
+
+                header.appendChild(div);
+                // console.log(div);
+                created = true;
+            }
+
+            let options =document.querySelector('.options');
+            options.style.visibility = "visible";
+
+            let event_lists = document.querySelectorAll('.event_lists');
+
+            // console.log(event_lists);
+            for(let event of event_lists){
+                event.onclick = event_run;
+            }
+
+            async function event_run(e){
+                let name = e.target.innerHTML;
+                if(name.includes(' '))
+                    name = name.split(' ').join('_');
+
+
+                let data = await fetch(`/events_display?type=${name}`);
+
+                data = await data.json();
+
+                 document.getElementById('for').submit()
+                // if(data.length > 0){
+                //     window.location = `http://localhost:3000/sports`;
+                // }
+            }
+            visible = true;
+            
+        }
+      else{
+        let options =document.querySelector('.options');
+
+            options.style.visibility = "hidden";
+            visible = false;
+            console.log(visible);
+            console.log("second");
+
+        }   
+
+    }
+
+
+    
+
+</script>
 </body>
-</html>
