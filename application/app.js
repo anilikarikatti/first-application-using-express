@@ -82,8 +82,10 @@ app.get("/event_types",router);
 app.get('/events_display',router)
 
 app.get('/sports',(req,res)=>{
-    res.render('sports.html')
-})
+   let value = req.query.value
+   value = JSON.parse(value)
+   res.render("sports.html",{value:value}); 
+});
 
 app.listen(port,()=>{
     console.log(`listening port ${port}`);

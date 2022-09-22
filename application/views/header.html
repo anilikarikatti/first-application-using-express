@@ -83,7 +83,8 @@
 
 {% block header %}
     <!-- <div class="container"> -->
-        <form action="/events_display" method="get" id="for">
+
+        <form id="formm">
         <header>
             <div class="header">
                 <img src="jgi-logo.png" alt="" srcset="">
@@ -142,10 +143,20 @@
                     if(i.includes('_')){
                         i = i.split('_').join(' ');
                     }
-                    li.innerText = i;
+                    let a = document.createElement('a');
+
+                    // a.classList.add('atag');
+
+                    // a.setAttribute('href','/events_display');
+                    // a.innerHTML = i;
+
+                    // li.appendChild(a)
+
+                    li.innerHTML = i;
                     li.classList.add('event_lists')
+
                     // console.log(i);
-                    div.appendChild(li);
+                    div.appendChild( li);
                 }
 
                 header.appendChild(div);
@@ -162,23 +173,47 @@
             for(let event of event_lists){
                 event.onclick = event_run;
             }
+            visible = true;
+
 
             async function event_run(e){
                 let name = e.target.innerHTML;
+                console.log(name);
                 if(name.includes(' '))
                     name = name.split(' ').join('_');
 
+                // console.log(name);
+                // let data = await fetch(`/events_display?type=${name}`);
 
-                let data = await fetch(`/events_display?type=${name}`);
+                // data = await data.json();
+                // console.log(data);
+                let inp = document.createElement('input');
+                inp.value = name;
+                inp.name ="type";
+                console.log(inp);
+                // inp.visibility= hidden;
+                let d =document.querySelector('.links')
+                d.appendChild(inp);
+                console.log(d);
+                // div.appendChild('inp');
+                let form = document.querySelector('#formm');
+                form.action = `/events_display`;
+                         
+                // console.log(form);
+                form.submit();
+                let elem =document.querySelector('input');
+                elem.remove();
 
-                data = await data.json();
+                let opt = document.querySelector('.options');
 
-                 document.getElementById('for').submit()
-                // if(data.length > 0){
-                //     window.location = `http://localhost:3000/sports`;
-                // }
+                opt.style.visibility = 'hidden';
+
+                visible = false;
+                    //  document.getElementById('for').submit()
+                // // if(data.length > 0){
+                // //     window.location = `http://localhost:3000/sports`;
+                // // }
             }
-            visible = true;
             
         }
       else{

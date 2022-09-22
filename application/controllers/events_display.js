@@ -2,8 +2,11 @@ const connection = require('../dbconfig/connect');
 
 
 async function events_display(req,res){
-
+        // console.log(req.body);
+        // let {type} =req.body;
+        console.log(req.query);
         let {type} = req.query;
+        // console.log();
         console.log(type);
         let pool = await connection.pool;
         let poolPromise = await pool.promise();
@@ -18,14 +21,18 @@ async function events_display(req,res){
 
                 let [row] = await poolPromise.execute(query2,[id]);
 
+                row=JSON.stringify(row)
                 // console.log(row);
 
-                res.redirect('/sports')                
+                // res.json(row)
+                // return row;
+                res.redirect('/sports?value='+row);                
         }
         catch(e){
             console.log(e);
         }
 }
+
 
 
 module.exports = {events_display};

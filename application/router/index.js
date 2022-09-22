@@ -21,7 +21,7 @@ router.get("/logout",ControllerUser.logout);
 
 router.get("/event_types",eventController.event_types)
 
-
+// router.get("/sports",)
 router.get("/events_display",eventDisplay.events_display)
     
 module.exports = router;
