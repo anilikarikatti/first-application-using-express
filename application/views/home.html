@@ -5,12 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home page</title>
+
+    <style>
+        h1{
+            margin-left: 380px;
+            margin-top: 40px;
+            text-transform: capitalize ;
+        }
+        .heading-logo{
+            height: 100px;
+            width: 100%;
+        }
+    </style>
    
 </head>
 <body>
-    {% extends "./header.html" %}
-   
-    
+    {% block header%}
+    {% include "./header.html" %}    
+
+
+{% endblock%}
+
+    {% block content %}
+    <!-- <img src="logo.jpg" class="heading-logo" alt="" srcset=""> -->
+    <h1>welcome {{name}} to karnataka's best university</h1> 
+    {% endblock %}   
 </body>
 
 </html>

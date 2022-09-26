@@ -5,13 +5,187 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table{
+           position: absolute;
+           left: 500px;
+           top: 200px;
+        }
+        td{
+            height: 40px;
+            width: 100px;
+            text-align: center;
+            text-transform: capitalize;
+        }
+        button{
+            text-transform: capitalize;
+            color: wheat;
+            background-color: blueviolet;
+        }
+        th{
+            text-transform: capitalize;
+            text-align: center;
+
+        }
+        p{
+            margin-top: 120px;
+            margin-left: 450px;
+            font-size: 30px;
+            text-transform: capitalize;
+        }
+        .add{
+            background-color: green;
+        }
+
+        .remove{
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
-    hello 
-    {% block content %}
+
+    <div class="descripton">
+        <p>hi {{user}}, you can register or cancel your events</p>
+        
+        
+    </div>
+    <table border="2px solid black">
+        <th>event names </th>
+        <th>status</th>
+        <th>add</th>
+        
+        <th>cancel</th>
+        {% block content %}
         {% for da in value %}
-            <li>{{da.name}}</li>
+        
+        <tr><td>{{da.name}}</td>
+            <td class="status" id="{{da.id}}">
+                {% for eve in event %}
+                     {% if da.id == eve.event_id %}
+                        Registered
+
+                    {% endif %}
+                {% endfor %}
+            </td>
+           <td> <button class="add {{da.id}}" id="{{da.id}}">register</button> </td>
+           <td><button class="remove {{da.id}}" id="{{da.id}}">cancel</button></td>
+            <td><button>go back</button></td>
+        </tr>
         {% endfor %}
     {% endblock%}
+    <script>
+        window.onload=function(){
+            let buttons = document.querySelectorAll('button');
+
+            for(let btn of buttons){
+                btn.onclick = registerOrCancel;
+            }
+
+            function registerOrCancel(e){
+                let name= e.target.innerText;
+
+                if(name == 'Register'){
+                    register(e);
+                }
+                if(name == 'Cancel'){
+                    cancelRegister(e)
+                }
+
+                if(name == 'Go Back'){
+                    window.location = 'http://localhost:3000/home'
+                }
+            }
+
+            async function register(e){ 
+                let event_id = e.target.className.split(' ')[1];
+               
+
+                let status = document.querySelectorAll('.status');
+
+                for(let st of status){
+                    if(st.id == event_id){
+                        if(st.innerText == ''){
+
+                                        let data = fetch(`/register_events?id=${event_id}`);
+
+                                        alert("registered");
+
+                                        let btn = e.target;
+
+                                        btn.disabled = true;
+
+
+                                        let can_btn =document.querySelectorAll('.remove');
+
+                                        for(let bt of can_btn){
+                                            if(bt.id == event_id){
+                                                bt.disabled = false
+                                            console.log(bt);
+                                            }
+                                        }
+
+                        st.innerText = 'registered'
+
+                        }
+                        else{
+                            let btn = e.target;
+
+                                        btn.disabled = true;
+
+                        }
+                    }
+                }
+
+            }
+
+            async function cancelRegister(e){
+                let event_id = e.target.className.split(' ')[1];
+
+
+                
+                let status = document.querySelectorAll('.status');
+
+                for(let st of status){
+                    if(st.id == event_id){
+                        console.log(st.innerText);
+                        if(st.innerText == 'Registered'){
+
+                            let data = fetch(`/cancelRegister?id=${event_id}`);
+                            
+                             alert("are u cancel your registration");
+
+                                let btn = e.target;
+
+                                console.log(btn);
+
+
+                                btn.disabled = true;
+
+                                let can_btn =document.querySelectorAll('.add');
+
+                                for(let bt of can_btn){
+                                    if(bt.id == event_id){
+                                        bt.disabled = false
+                                    console.log(bt);
+                                    }
+                                }
+
+                             st.innerText = ' ';
+
+                    }
+
+                }
+                }
+
+                // for(let i of )
+            }
+
+        }
+    </script>
+    </table>
+
+
+    
 </body>
 </html>
+

@@ -57,18 +57,26 @@ app.get("/",(req,res)=>{
 
 
 app.get("/home",(req,res)=>{
-    // if(req.session.user){
-        // res.render("home.html",{name:req.session.user});
-        res.render("home.html")
+    if(req.session.user){
+        res.render("home.html",{name:req.session.user});
+        // res.render("home.html")
         console.log(req.sessionID);
-    // }
-    // else{
-    //     res.render("login.html")
-    // }
+    }
+    else{
+        res.render("login.html")
+    }
 })
 
 app.get("/contact",(req,res)=>{
-    res.render("contact.html")
+
+    if(req.session.user){
+        res.render("contact.html")
+
+    }
+    else{
+        res.render("login.html")
+    }
+
 })
 app.post("/registerUser",router);
 
@@ -82,11 +90,36 @@ app.get("/event_types",router);
 app.get('/events_display',router)
 
 app.get('/sports',(req,res)=>{
-   let value = req.query.value
-   value = JSON.parse(value)
-   res.render("sports.html",{value:value}); 
+    
+   let value = req.query.value;
+   let events = req.query.events;
+   value = JSON.parse(value);
+
+   events = JSON.parse(events);
+   if(req.session.user){
+
+   res.render("sports.html",{value:value,
+user:req.session.user,
+event:events}); 
+   }
+   else{
+    res.render("login.html")
+
+   }
 });
 
+
+app.get("/register_events",router)
+
+app.get("/cancelRegister",router)
+
+app.get('/links',(req,res)=>{
+    res.render('link_learn.html')
+})
+
+app.get('/dummy_events',(req,res)=>{
+   res.json("hello world")
+})
 app.listen(port,()=>{
     console.log(`listening port ${port}`);
 })
