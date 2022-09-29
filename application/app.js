@@ -80,7 +80,7 @@ app.get("/contact",(req,res)=>{
 })
 app.post("/registerUser",router);
 
-app.post("/loginuser",router);
+app.post("/loginUser",router);
 
 app.get("/logout",router);
 

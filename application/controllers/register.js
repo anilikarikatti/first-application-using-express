@@ -4,8 +4,9 @@ const session = require("express-session");
 const connection = require("../dbconfig/connect")
 
 
-async function registerUser(req,res){
+async function registerUser(req,res){   
     const {name,password} = req.body;
+
     let pool = await connection.pool;
 
     let query = `insert  into user (name ,password) values(?,?)`
@@ -27,7 +28,8 @@ async function registerUser(req,res){
 
 async function loginUser(req,res){
     const {name,password} = req.body;
-
+    // console.log("page entered");
+    // console.log(name);
     const pool = await connection.pool;
 
     const poolPromise = pool.promise();

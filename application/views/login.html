@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login page</title>
     <style>
-        .container{
+        /* .container{
             position: absolute;
             left: 400px;
             top: 100px;
@@ -47,27 +47,119 @@
         }
         h2{
             text-align:  center;
+        } */
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+        .container{
+            height: 100vh;
+            width:100%;
+            background-color: yellow;
+            display: flex;
+            /* margin-top: 100px; */
+            overflow: hidden;
+            /* border-radius: 10%; */
+        }.boxes{
+            height: 500px;
+            width: 40%;
+            margin-left: 100px;
+            border-radius: 10%;
+
+
+            border: 2px solid black;
+        }
+        .image{
+            /* background-color: red; */
+            background-image: url('parrot3.png');
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        .top{
+            margin-top: 50px;
+            background-color: white;
+
+        }
+        .bottom{
+            margin-top: 150px;
+
+        }
+        h2{
+            margin-left: 120px;
+        }
+        .login{
+            margin-top: 100px;
+            font-size: 30px;
+            margin-left: 230px;
+            text-transform: uppercase;
+            font-family: 'Courier New', Courier, monospace;
+            /* font-weight: 20px; */
+            /* background-color: aqua; */
+            /* padding: 10px; */
+        }
+
+        .input{
+            margin-top: 100px;
+            margin-left: 120px;
+            text-transform: capitalize;
+        }
+        .name{
+            margin-top: 40px;
+            margin-left: 30px;
+        }
+        .pass{
+            margin-top: 40px;
+            margin-left: 10px;
+        }
+        .inp{
+            height: 20px;
+            text-transform: capitalize;
+        }
+        .buttons{
+            margin-top: 60px;
+            margin-left: 150px;
+        }
+
+        .res{
+            margin-left: 100px;
+            height: 30px;
+            width: 80px;
+            font-size: 20px;
+            text-transform: capitalize;
+        }
+        .sub{
+            height: 30px;
+            width: 80px;
+            font-size: 20px;
+            text-transform: capitalize;        
         }
     </style>
 </head>
 <body>
     {% block content %}
 
-        <form action="/loginuser" method="post">
+        <form action="/loginUser" method="post">
             <div class="container">
-                <h2>login user</h2>
-                <div>
-                    <label for="name">enter your username</label>
-                    <input type="text" name = "name" placeholder="enter your name" id="name">
+                <div class="boxes top">
+                    <h2>Welcome to Jain University</h2>
+                    <p class="login">login</p>
+
+                    <label for="name" class="input">enter your name</label>
+                    <input type="text" id="name"  name = "name" class="name inp">
+                    <label for="password" class="input">enter your password</label>
+                    <input type="password" id="password"  name= "password" class="pass inp">
+
+                    <div class="buttons">
+                        <button type="submit" class="sub">submit</button>
+                        <button type="reset" class="res">reset</button>
+
+                    </div>
+
                 </div>
-                <div>
-                    <label for="password">enter your password</label>
-                    <input type="password" name = "password" placeholder="enter your password" id="password">
-                </div>
-                <div>
-                    <button type="submit">submit</button>
-                    <button type="reset">reset</button>
-                </div>
+                <div class="boxes image bottom"></div>
             </div>
         </form>
 
